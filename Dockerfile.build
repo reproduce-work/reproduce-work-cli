@@ -1,0 +1,3 @@
+FROM rw-cli:latest
+WORKDIR /home/node
+RUN npm run build

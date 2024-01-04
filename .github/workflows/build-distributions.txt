@@ -1,0 +1,58 @@
+name: Build Docker Image/NPM Package and Upload Dist Files as Artifacts
+
+on:
+  push:
+    branches:
+      - dev-v2  # or your default branch name
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install jq
+      run: sudo apt-get install jq
+
+    - name: Extract version from package.json
+      run: echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+    - name: Build Docker image
+      run: docker build . --file Dockerfile --tag rw-cli:$VERSION
+
+    - name: Extract artifacts
+      run: |
+        # Create a temporary container but don't run it
+        container_id=$(docker create rw-cli:$VERSION)
+        
+        # Copy specific binaries from container to host
+        docker exec $container_id sh -c 'tar cf - /home/node/bin/reproduce-work-*' | tar xvf - -C ./bin/
+        
+        # Cleanup
+        docker rm $container_id
+    
+    - name: Upload distribution packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist-packages
+        path: bin/
+
+    - name: Create Release Candidate
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.VERSION }}
+        name: Candidate Release ${{ env.VERSION }}
+        draft: true # You can make it a draft so it's not publicly visible until you're ready
+        prerelease: true # Marks the release as a pre-release
+        files: |
+          bin/reproduce-work-linux-x64
+          bin/reproduce-work-linux-arm64
+          bin/reproduce-work-macos-x64
+          bin/reproduce-work-macos-arm64
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

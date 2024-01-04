@@ -1,0 +1,7 @@
+#node_modules*
+.cache*
+.npm*
+.pkg-cache*
+.bash_history
+.DS_Store
+#bin/reproduce-work-*

@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{xcolor}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage[round,sort,comma]{natbib}
+\bibliographystyle{bibstyle}
+\usepackage{setspace}
+\let\oldbibitem\bibitem
+\renewcommand{\bibitem}[2][]{\oldbibitem[#1]{#2} \setlength{\itemsep}{0pt}}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{advdate}
+\AdvanceDate[-1]
+\usepackage{titlesec}
+\newcommand{\addperiod}[1]{#1.$\;$}
+\titlespacing{\section}{0pt}{0.5\parskip}{-\parskip}
+\titleformat{\subsection}[runin]{\normalsize\bfseries}{\thesubsection}{1em}{\addperiod}
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{\addperiod}
+\titlespacing{\subsubsection}{14pt plus 4pt minus 2pt}{0.5\parskip}{-\parskip}
+\setlength{\parindent}{1em}
+\makeatletter
+\g@addto@macro \normalsize {
+    \setlength\abovedisplayskip{3pt plus 5pt minus 2pt}
+    \setlength\belowdisplayskip{3pt plus 5pt minus 2pt}
+}
+\makeatother
+\newcommand{\comment}[1]{}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes}
+
+\begin{document}
+\pagenumbering{gobble}
+\begin{center}
+    {\fontsize{16}{16}\selectfont\bfseries \INSERT{config.project.full_title}}\\
+    \vspace{5mm}
+    \begin{table}[!ht]
+        \begin{center}
+            \begin{tabular}{c c }
+                \shortstack{
+                    \INSERT{config.authors[0].name} \\
+                    \INSERT{config.authors[0].affiliation} \\
+                    \INSERT{config.authors[0].email}
+                }
+            \end{tabular}
+        \end{center}
+    \end{table}
+    \vspace{5mm}
+    \emph{Last updated: \today}
+    \vspace{4mm}
+    \hyphenpenalty=10000 
+    \exhyphenpenalty=10000
+    \abstract{\INSERT{config.project.abstract}}\\
+    \vspace{2cm}
+    %{\scriptsize \noindent Notes: reproduce.work/v0.0.1  \raisebox{-1mm}{\includegraphics[width=5mm]{  }} }
+    \hyphenpenalty=50 
+    \exhyphenpenalty=50
+    \vspace{10mm}
+\end{center}
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1} 
+\doublespacing
+%%@@LOWDOWN_CONTENT@@%%  
+\newpage
+{\singlespacing \bibliography{bibliography} }
+\end{document}

@@ -1,0 +1,28 @@
+# Ignore node modules
+node_modules
+.npm*
+.config*
+/root/node_modules
+/root/.npm*
+/root/.config*
+/home/node/node_modules
+/home/node/.npm*
+/home/node/.config*
+
+# Ignore .git directory and .gitignore
+.git
+.gitignore
+
+# Ignore development environment files
+*.log
+*.swp
+*.bak
+*.tmp
+.DS_Store
+
+# Ignore run and distribution directories
+dist
+run
+
+# Ignore environment variables file
+.env
