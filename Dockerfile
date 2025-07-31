@@ -30,11 +30,11 @@ USER node
 
 # Install any needed packages specified in package.json
 RUN npm install
-ENV PATH /home/node/node_modules/.bin:$PATH
+ENV PATH=/home/node/node_modules/.bin:$PATH
 
 #RUN chmod +x /home/node/bin/reproduce-work
 #RUN ln -s /home/node/bin/reproduce-work /home/node/bin/rw
-ENV PATH /home/node/bin:$PATH
+ENV PATH=/home/node/bin:$PATH
 
 RUN npm run build
 
