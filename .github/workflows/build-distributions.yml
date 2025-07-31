@@ -33,6 +33,16 @@ jobs:
         # Copy specific binaries from container to host
         docker cp $container_id:/home/node/bin/. ./bin/
         
+        # Create tar.gz archives for each binary
+        cd bin
+        for binary in reproduce-work-*; do
+          if [ -f "$binary" ]; then
+            tar -czf "${binary}.tar.gz" "$binary"
+            echo "Created ${binary}.tar.gz"
+          fi
+        done
+        cd ..
+        
         # Cleanup
         docker rm $container_id
     
@@ -50,9 +60,9 @@ jobs:
         draft: true # You can make it a draft so it's not publicly visible until you're ready
         prerelease: true # Marks the release as a pre-release
         files: |
-          bin/reproduce-work-linux-x64
-          bin/reproduce-work-linux-arm64
-          bin/reproduce-work-macos-x64
-          bin/reproduce-work-macos-arm64
+          bin/reproduce-work-linux-x64.tar.gz
+          bin/reproduce-work-linux-arm64.tar.gz
+          bin/reproduce-work-macos-x64.tar.gz
+          bin/reproduce-work-macos-arm64.tar.gz
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
