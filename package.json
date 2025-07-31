@@ -16,7 +16,14 @@
   "pkg": {
     "assets": [
       "static/tex/*",
-      "static/img/*"
+      "static/img/*",
+      "node_modules/blessed/usr/xterm",
+      "node_modules/blessed/usr/xterm-256color",
+      "node_modules/blessed/usr/linux",
+      "node_modules/blessed/usr/windows-ansi",
+      "node_modules/blessed/usr/xterm.termcap",
+      "node_modules/blessed/usr/xterm.terminfo",
+      "node_modules/blessed/usr/fonts/*"
     ]
   },
   "keywords": [
