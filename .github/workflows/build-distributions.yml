@@ -31,7 +31,7 @@ jobs:
         container_id=$(docker create rw-cli:$VERSION)
         
         # Copy specific binaries from container to host
-        docker exec $container_id sh -c 'tar cf - /home/node/bin/reproduce-work-*' | tar xvf - -C ./bin/
+        docker cp $container_id:/home/node/bin/. ./bin/
         
         # Cleanup
         docker rm $container_id
