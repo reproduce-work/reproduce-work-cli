@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Allow JIT (Just In Time) compilation -->
+    <!-- Necessary for applications that use JIT compilation -->
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+
+    <!-- Allow execution of other binaries -->
+    <!-- Needed for spawning processes -->
+    <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+    <true/>
+
+    <!-- Allow read/write access to all files -->
+    <!-- Necessary for unrestricted file read/write operations 
+    <key>com.apple.security.files.all</key>
+    <true/> -->
+
+    <!-- Allow outgoing network connections -->
+    <!-- Necessary for accessing local networking properties and hosting servers -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+
+    <!-- Disable library validation -->
+    <!-- Allows your app to load arbitrary plugins or frameworks, which might be needed for Docker integration -->
+    <key>com.apple.security.cs.disable-library-validation</key>
+    <true/>
+
+</dict>
+</plist>
