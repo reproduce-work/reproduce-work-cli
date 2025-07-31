@@ -3,7 +3,7 @@ name: Build Docker Image/NPM Package and Upload Dist Files as Artifacts
 on:
   push:
     branches:
-      - dev-v2  # or your default branch name
+      - main  # or your default branch name
 
 permissions:
   contents: write
